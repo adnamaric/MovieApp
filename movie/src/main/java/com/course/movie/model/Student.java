@@ -5,7 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table
@@ -19,6 +23,9 @@ public class Student {
     private String studentName;
 
     @Column( nullable = false)
-    private String studentAge;
+    private int studentAge;
     
+    @ManyToOne
+    @JoinColumn(name = "fakultetID")
+    private Fakultet fakultet;
 }
