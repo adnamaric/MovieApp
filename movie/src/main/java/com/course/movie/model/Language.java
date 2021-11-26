@@ -10,17 +10,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Fakultet {
+public class Language {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int facultyID ;
+    private Integer LanguageID ;
 
     @Column(nullable = false)
-    private String facultyName;
+    private String LanguageName;
 
     @Column( nullable = false)
-    private int numberOfStudents;
+    private String code;
     
    
 
