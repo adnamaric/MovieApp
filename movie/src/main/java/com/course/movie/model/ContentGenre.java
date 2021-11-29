@@ -22,7 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-class ContentGenre {
+ class ContentGenre {
 
     @EmbeddedId
     @Column(name = "content_genre_id", nullable = false)
