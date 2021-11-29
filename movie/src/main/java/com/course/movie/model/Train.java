@@ -1,15 +1,13 @@
 package com.course.movie.model;
 
-
-
-import java.util.List;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -18,31 +16,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-
-@Entity
-@Table
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-
-public class Genre {
+@NoArgsConstructor
+@Entity
+@Table(name = "train")
+public class Train {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer GenreId;
+    private int trainId;
 
-    @Column(nullable = false)
-    private String Name;
-
-  
-   /* @OneToMany(mappedBy = "content")
-    List<ContentGenre> contentGenre;
-    */
-
-
-
- 
+    @Column(name = "name", nullable = false)
+    private String trainName;
     
-    
+
+    @OneToOne(mappedBy = "train", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+//    @OneToOne(mappedBy = "train")
+    private Garage garage;
 }

@@ -1,5 +1,7 @@
 package com.course.movie.model;
 
+import java.util.List;
+
 //import java.util.List;
 
 import javax.persistence.Column;
@@ -7,9 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.OneToMany;
 //import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,7 +41,7 @@ public class Student {
     @Column( nullable = false)
     private int studentAge;
 
-	public Integer getStudentId() {
+	/*public Integer getStudentId() {
 		return studentId;
 	}
 
@@ -62,10 +66,11 @@ public class Student {
 	}
 
 	
-    
+    */
 
-   // @OneToMany(mappedBy = "faculty")
-   // List<StudentFaculty> studentsOnFaculty;
+   @OneToMany(mappedBy = "faculty")
+   @JsonIgnore
+   List<StudentFaculty> studentsOnFaculty;
     
    /* @ManyToMany
     @JoinTable(
