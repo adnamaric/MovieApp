@@ -1,5 +1,10 @@
 package com.course.movie;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,6 +13,60 @@ public class MovieApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MovieApplication.class, args);
+		InsertData() ;
 	}
 
+    public static void InsertData() {
+		try  {
+			 Connection con= DriverManager.getConnection("jdbc:postgresql://localhost:5432/Movies","postgres","adna");
+			 System.out.println("Uspješno ostvarena veza sa bazom");
+			 Statement st=con.createStatement();
+			 
+			 //genre
+			 ResultSet rs = st.executeQuery("SELECT * from Genre");
+	         if(rs.next()==true) {
+	        	 System.out.println("U bazi već postoje podaci");
+	         }
+	         else { 
+	        	 st.execute("INSERT INTO Genre VALUES(1,'Komedija')");
+	        	 st.execute("INSERT INTO Genre VALUES(2,'Drama')");
+
+	    		 System.out.println("Uspješno dodani podaci");
+	         }
+	         
+	         //content
+			 rs=st.executeQuery("SELECT * FROM Content");
+			 if(rs.next()==true)
+			 {
+	        	 System.out.println("U bazi već postoje podaci za kontent");
+	         }
+			 else { 
+	        	 st.execute("INSERT INTO Content VALUES(1,'Title number 1')");
+	        	 st.execute("INSERT INTO Content VALUES(2,'Title number 2')");
+
+	    		 System.out.println("Uspješno dodani podaci");
+	         }
+			 
+			 
+		     //language
+					 rs=st.executeQuery("SELECT * FROM Language");
+					 if(rs.next()==true)
+					 {
+			        	 System.out.println("U bazi već postoje podaci");
+			         }
+					 else { 
+			        	 st.execute("INSERT INTO Language VALUES(1,'Engleski jezik','222')");
+			        	 st.execute("INSERT INTO Language VALUES(2,'Njemacki jezik','223')");
+
+			    		 System.out.println("Uspješno dodani podaci");
+			         }
+			 
+			 con.close();
+		}
+			 catch (Throwable e) {
+		            e.printStackTrace();
+		        }
+			
+    }
+    
 }

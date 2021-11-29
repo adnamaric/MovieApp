@@ -3,7 +3,7 @@ package com.course.movie.model;
 
 import java.util.List;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,10 +26,10 @@ public class Content {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ContentID ;
 
-    /* @Column(nullable = false)
+     @Column(nullable = false)
     private String Title;
     
-    @Column(nullable = false)
+    /*@Column(nullable = false)
     private Integer Year;
    
     @Column(nullable = false)
