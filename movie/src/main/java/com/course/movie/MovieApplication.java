@@ -35,14 +35,15 @@ public class MovieApplication {
 	         }
 	         
 	         //content
-			 rs=st.executeQuery("SELECT * FROM Content");
+	        // columns in pg are sorted alphabetically 
+	         rs=st.executeQuery("SELECT * FROM Content");
 			 if(rs.next()==true)
 			 {
 	        	 System.out.println("U bazi već postoje podaci za kontent");
 	         }
 			 else { 
-	        	 st.execute("INSERT INTO Content VALUES(1,'Title number 1')");
-	        	 st.execute("INSERT INTO Content VALUES(2,'Title number 2')");
+	        	 st.execute("INSERT INTO Content VALUES(1,180,'Title number 1',1991)");
+	        	 st.execute("INSERT INTO Content VALUES(2,60,'Title number 2',1992)");
 
 	    		 System.out.println("Uspješno dodani podaci");
 	         }

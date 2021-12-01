@@ -3,8 +3,10 @@ package com.course.movie.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,14 +32,19 @@ public class ContentComment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer CommentID ;
     
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    List<User> User;
+    // chech why this throws error
+//    @OneToMany(mappedBy = "UserID")
+//    @JsonIgnore
+//    List<User> User;
     
-    @OneToMany(mappedBy = "content")
+    @OneToMany(mappedBy = "ContentID")
     @JsonIgnore
-    List<User> Content;
-    
+    List<Content> Content;
+//    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="ContentID")
+//    private List<Content> content;
+//    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="UserID")
+//    private List<User> user;
+
     @Column(nullable = false)
     private String comment;
 

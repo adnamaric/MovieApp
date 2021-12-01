@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 import com.course.movie.model.Content;
 
 
@@ -17,6 +16,10 @@ public interface ContentRepository extends JpaRepository<Content, Integer> {
 
 	
 
-	List<Content> findAll();	
+	List<Content> findAll();
+
+	
+
+	
 	  
 }

@@ -14,11 +14,11 @@ public class Review {
 	  @EmbeddedId
 	   ReviewKey id;
 
-	    @ManyToOne
-	    @MapsId("UserID")
-	    @JoinColumn(name = "UserID")
-	    User user;
-   
+//	    @ManyToOne
+//	    @MapsId("UserID")
+//	    @JoinColumn(name = "UserID")
+//	    User user;
+//   
 	    @ManyToOne
 	    @MapsId("ContentID")
 	    @JoinColumn(name = "ContentID")
