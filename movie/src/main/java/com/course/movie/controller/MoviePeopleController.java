@@ -1,9 +1,6 @@
 package com.course.movie.controller;
 
-
 import java.util.List;
-
-//import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
@@ -16,44 +13,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.course.movie.dto.LanguageDto;
-import com.course.movie.model.Language;
-import com.course.movie.repository.LanguageRepository;
-import com.course.movie.service.LanguageService;
-
-
-
+import com.course.movie.dto.MoviePeopleDto;
+import com.course.movie.model.MoviePeople;
+import com.course.movie.repository.MoviePeopleRepository;
+import com.course.movie.service.MoviePeopleService;
 
 @RestController
-@RequestMapping("/language")
-public class LanguageController {
-	
+@RequestMapping("/moviepeople")
+public class MoviePeopleController {
 	@Autowired
-	LanguageRepository languageRepository;
+	MoviePeopleService moviePeopleService;
 	@Autowired
-	LanguageService languageService;
-	 @GetMapping("/test")
-	  public String sayHello(){
-	        return "It works";
-	    }
+	MoviePeopleRepository moviePeopleRepository;
 	
 	 @GetMapping("/all")
-	  public List<Language> findAll(){
-	        return languageRepository.findAll();
+	  public List<MoviePeople> findAll(){
+	        return moviePeopleRepository.findAll();
 	   }
 	
 	 @PostMapping("/insert")
-		public Language insert(@RequestBody LanguageDto languageDto) throws NotFoundException {
-			return languageService.insert(languageDto);
+		public MoviePeople insert(@RequestBody MoviePeopleDto movieRoleDto) throws NotFoundException {
+			return moviePeopleService.insert(movieRoleDto);
 		}
 
 		@PutMapping("/update")
-		public Language update(@RequestBody Language language) throws NotFoundException {
-			return languageService.update(language);
+		public MoviePeople update(@RequestBody MoviePeople mp) throws NotFoundException {
+			return moviePeopleService.update(mp);
 		}
 
 		@DeleteMapping("/delete")
 		public void delete(@RequestParam int id) throws NotFoundException {
-			languageService.delete(id);
+			moviePeopleService.delete(id);
 		}
 }

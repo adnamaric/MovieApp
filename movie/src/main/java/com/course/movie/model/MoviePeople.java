@@ -10,8 +10,13 @@ import javax.persistence.Id;
 
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table
+@Getter
+@Setter
 public class MoviePeople {
 
     @Id
@@ -24,7 +29,7 @@ public class MoviePeople {
     @Column(nullable = false)
     private String lastName;
     
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Date birthDate;
     
     @Column(nullable = false)

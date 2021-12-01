@@ -8,8 +8,13 @@ import javax.persistence.Id;
 
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table
+@Getter
+@Setter
 public class ContentType {
 
     @Id
@@ -17,7 +22,7 @@ public class ContentType {
     private Integer ContentTypeID ;
 
     @Column(nullable = false)
-    private String ContentTypeName;
+    private String Name;
 
    
     
