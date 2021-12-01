@@ -33,9 +33,9 @@ public class ContentComment {
     private Integer CommentID ;
     
     // chech why this throws error
-//    @OneToMany(mappedBy = "UserID")
-//    @JsonIgnore
-//    List<User> User;
+    @OneToMany(mappedBy = "UserID")
+    @JsonIgnore
+    List<User> User;
     
     @OneToMany(mappedBy = "ContentID")
     @JsonIgnore

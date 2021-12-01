@@ -61,7 +61,19 @@ public class MovieApplication {
 
 			    		 System.out.println("Uspješno dodani podaci");
 			         }
-			 
+			 // country
+					 
+					 rs=st.executeQuery("SELECT * FROM Country");
+					 if(rs.next()==true)
+					 {
+			        	 System.out.println("U bazi već postoje podaci");
+			         }
+					 else { 
+			        	 st.execute("INSERT INTO Country VALUES(1,111,'Bosna i Hercegovina')");
+			        	 st.execute("INSERT INTO Country VALUES(2,111,'Hrvatska')");
+			        	 st.execute("INSERT INTO Country VALUES(3,111,'Srbija')");
+			    		 System.out.println("Uspješno dodani podaci");
+			         }
 			 con.close();
 		}
 			 catch (Throwable e) {
