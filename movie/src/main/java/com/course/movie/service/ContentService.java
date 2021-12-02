@@ -19,7 +19,7 @@ public class ContentService {
 		return contentRepository.save(createContentFromDto(contentDto));
 	}
 
-	public Optional<Content> findById(int id) throws NotFoundException {
+	public Optional<Content> findById(Integer id) throws NotFoundException {
 		return contentRepository.findById(id);
 		}
 

@@ -1,5 +1,6 @@
 package com.course.movie.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,14 +10,17 @@ import org.springframework.stereotype.Service;
 
 import com.course.movie.dto.EpisodeDto;
 import com.course.movie.model.Episode;
+import com.course.movie.model.Season;
 import com.course.movie.repository.EpisodeRepository;
+import com.course.movie.repository.SeasonRepository;
 
 @Service
 public class EpisodeService {
 
 	@Autowired
 	EpisodeRepository episodeRepository;
-
+	@Autowired
+	SeasonRepository seasonRepository;
 	public Episode save(EpisodeDto episodeDto) {
 		return episodeRepository.save(createEpisodeFromDto(episodeDto));
 	}
@@ -49,9 +53,19 @@ public class EpisodeService {
 
 	private Episode createEpisodeFromDto(EpisodeDto episodeDto) {
 		Episode episode = new Episode();
-		episode.setEpisodeName(episodeDto.getName());
+		episode.setEpisodeName(episodeDto.getEpisodeName());
 		episode.setDuration(episodeDto.getDuration());
-		episode.setEpisodeNumber(episode.getEpisodeNumber());
-		return episode;
+		episode.setEpisodeNumber(episodeDto.getEpisodeNumber());
+		List<Season> sezone=new ArrayList<Season>();
+		sezone=this.seasonRepository.findAll();
+		for(int i=0;i<sezone.size(); i++) {
+			Season trazena=sezone.get(i);
+		if(trazena.getSeasonID()== episodeDto.getSeasonID()) {
+			episode.setSeason(trazena);
+		}
+		}
+		 return episode;
 	}
+	   
 }
+	

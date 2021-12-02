@@ -14,7 +14,6 @@ import com.course.movie.model.Content;
 @Repository
 public interface ContentRepository extends JpaRepository<Content, Integer> {
 
-	
 
 	List<Content> findAll();
 

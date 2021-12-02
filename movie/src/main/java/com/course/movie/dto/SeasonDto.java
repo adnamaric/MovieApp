@@ -9,10 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EpisodeDto {
-	  private String EpisodeName;
-	  private Integer Duration;
-	  private Integer EpisodeNumber;
-	   private Integer SeasonID;
+public class SeasonDto {
+    private String SeasonName;
+    private Integer SeasonNumber;
+    private Integer ContentID;
 
 }

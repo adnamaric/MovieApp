@@ -66,6 +66,7 @@ public class Content {
     @OneToMany(mappedBy = "genre")
     List<ContentGenre> contentGenre;
 
+    
 /*	public Integer getContentID() {
 		return ContentID;
 	}

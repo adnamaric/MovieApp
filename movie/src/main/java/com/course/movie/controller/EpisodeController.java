@@ -16,16 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.course.movie.dto.EpisodeDto;
 import com.course.movie.model.Episode;
+import com.course.movie.repository.EpisodeRepository;
 import com.course.movie.service.EpisodeService;
 
 @RestController
 @RequestMapping("/episode")
-
 public class EpisodeController {
 
 	@Autowired
 	EpisodeService episodeService;
-
+    @Autowired
+    EpisodeRepository episodeRepository;
+    
 	@GetMapping
 	public Optional<Episode> findById(@RequestParam int id) throws NotFoundException {
 		return episodeService.findById(id);

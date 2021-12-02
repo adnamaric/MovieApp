@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -35,13 +37,14 @@ public class Episode {
     private String episodeName;
     
     @Column( nullable = false)
-    private int duration;
+    private Integer duration;
 
     @Column( nullable = false)
-    private int episodeNumber;
-
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="SeasonID")
-     private List<Season> season;
+    private Integer episodeNumber;
+    
+    @ManyToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "SeasonID")
+    private Season season;
     
    
 }

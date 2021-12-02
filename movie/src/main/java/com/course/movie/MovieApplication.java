@@ -113,7 +113,27 @@ public class MovieApplication {
 				        	 st.execute("INSERT INTO Movie_People VALUES(3,null,'Sandra','F', 'Bullock')");
 				        	 st.execute("INSERT INTO Movie_People VALUES(4,null,'Drew','F', 'Barrymore')");
 				    		 System.out.println("Uspješno dodani podaci");}
+		// season				 
+						 rs=st.executeQuery("SELECT * FROM Season");
+						 if(rs.next()==true)
+						 {
+				        	 System.out.println("U bazi već postoje podaci");
+				         }
+						 else { 
+				        	 st.execute("INSERT INTO Season VALUES(1,'Season 1',1,1)");
+				        	 st.execute("INSERT INTO Season VALUES(2,'Season 2',2,1)");
+				    		 System.out.println("Uspješno dodani podaci");}
 		// episode
+						 rs=st.executeQuery("SELECT * FROM Episode");
+						 if(rs.next()==true)
+						 {
+				        	 System.out.println("U bazi već postoje podaci");
+				         }
+						 else { 
+				        	 st.execute("INSERT INTO Episode VALUES(1,60,'The Pilot One',1,1)");
+				        	 st.execute("INSERT INTO Episode VALUES(2,60,'Where it all starts',2,1)");
+				        	 st.execute("INSERT INTO Episode VALUES(3,60,'Drama never stops',3,1)");
+				    		 System.out.println("Uspješno dodani podaci");}
 			 con.close();
 		}
 			 catch (Throwable e) {
