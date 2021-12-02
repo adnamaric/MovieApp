@@ -62,7 +62,7 @@ public class SeasonService {
 		Content trazeni = list.get(i);
 	    if(trazeni.getContentID()==seasonDto.getContentID()) {
 	    	 season.setContent(trazeni);
-		}
+		 }
 	    
 	    }
 	   

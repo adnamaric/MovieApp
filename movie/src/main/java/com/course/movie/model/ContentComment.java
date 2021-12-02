@@ -3,20 +3,20 @@ package com.course.movie.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.JoinColumn;
-//import javax.persistence.ManyToOne;
-//import javax.persistence.MapsId;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
@@ -24,26 +24,25 @@ import lombok.Setter;
 @Table
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ContentComment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer CommentID ;
     
-    @OneToMany(mappedBy = "UserID")
-    @JsonIgnore
-    List<User> User;
+    @ManyToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "UserID")
+    private User user;
     
-    @OneToMany(mappedBy = "ContentID")
-    @JsonIgnore
-    List<Content> Content;
-//    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="ContentID")
-//    private List<Content> content;
-//    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="UserID")
-//    private List<User> user;
+    @ManyToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "ContentID")
+    private Content content;
+
 
     @Column(nullable = false)
-    private String comment;
+    private String Comment;
 
    
     

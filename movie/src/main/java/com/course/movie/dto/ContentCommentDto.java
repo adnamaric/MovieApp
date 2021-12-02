@@ -9,12 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContentDto {
-	private String Title;
-	private Integer Year;
-	private Integer Duration;
-    private Integer ContentTypeID;
-    private Integer LanguageID;
-    private Integer CountryID;
-
+public class ContentCommentDto {
+    private String Comment;
+    private Integer ContentID;
+    private Integer UserID;
 }

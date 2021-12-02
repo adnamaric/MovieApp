@@ -3,12 +3,14 @@ package com.course.movie.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -38,31 +40,31 @@ public class Content {
    
     @Column(nullable = false)
     private Integer Duration;
-   /* 
-    @Column(nullable = false)
-    private Date RealaseDate;
-    
-    @Column(nullable = false)
-    private float Rating;
-    
-    @Column(nullable = false)
-    private String CoverLink;
-    
-    @Column(nullable = false)
-    private String TrailerLink;
    
-    @ManyToOne
+//    @Column(nullable = true)
+//    private Date RealaseDate;
+    
+//    @Column(nullable = false)
+//    private float Rating;
+    
+//    @Column(nullable = true)
+//    private String CoverLink;
+//    
+//    @Column(nullable = true)
+//    private String TrailerLink;
+   
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "ContentTypeID")
     private ContentType contentType;
     
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "LanguageID")
     private Language language;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "CountryID")
     private Country country;
-    */
+ 
     @OneToMany(mappedBy = "genre")
     List<ContentGenre> contentGenre;
 
