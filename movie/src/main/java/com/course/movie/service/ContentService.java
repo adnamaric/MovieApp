@@ -7,6 +7,7 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 import com.course.movie.dto.ContentDto;
 import com.course.movie.dto.ContentGenreDto;
+import com.course.movie.dto.MovieCastDto;
 import com.course.movie.dto.ReviewDto;
 import com.course.movie.model.Content;
 import com.course.movie.model.ContentGenre;
@@ -15,6 +16,10 @@ import com.course.movie.model.ContentType;
 import com.course.movie.model.Country;
 import com.course.movie.model.Genre;
 import com.course.movie.model.Language;
+import com.course.movie.model.MovieCast;
+import com.course.movie.model.MovieCastKey;
+import com.course.movie.model.MoviePeople;
+import com.course.movie.model.MovieRole;
 import com.course.movie.model.Review;
 import com.course.movie.model.ReviewKey;
 import com.course.movie.model.User;
@@ -24,6 +29,9 @@ import com.course.movie.repository.ContentTypeRepository;
 import com.course.movie.repository.CountryRepository;
 import com.course.movie.repository.GenreRepository;
 import com.course.movie.repository.LanguageRepository;
+import com.course.movie.repository.MovieCastRepository;
+import com.course.movie.repository.MoviePeopleRepository;
+import com.course.movie.repository.MovieRoleRepository;
 import com.course.movie.repository.ReviewRepository;
 import com.course.movie.repository.UserRepository;
 
@@ -46,7 +54,12 @@ public class ContentService {
 	ReviewRepository reviewRepository;
 	@Autowired
 	UserRepository userRepository;
-	
+	@Autowired
+	MovieCastRepository movieCastRepository;
+	@Autowired
+	MoviePeopleRepository moviePeopleRepository;
+	@Autowired
+	MovieRoleRepository movieRoleRepository;
 	public Content save(ContentDto contentDto) {
 		return contentRepository.save(createContentFromDto(contentDto));
 	}
@@ -175,4 +188,24 @@ public class ContentService {
 	  this.reviewRepository.save(new Review(noviKey,user,content,reviewDto.getRating(),reviewDto.getFavourite()));
 	  return new Review(noviKey,user,content,reviewDto.getRating(),reviewDto.getFavourite());
 	}
+	public MovieCast addCast (MovieCastDto movieCastDto) {
+	       
+		return movieCastRepository.save(addCastFrom(movieCastDto));
+	}
+	private MovieCast addCastFrom(MovieCastDto movieCastDto) {
+		  
+		  Content content=new Content();
+          content=this.contentRepository.getById(movieCastDto.getContentID());
+		  MoviePeople m= new MoviePeople();
+		  m=this.moviePeopleRepository.getById(movieCastDto.getMoviePeopleID());
+		  MovieRole n=new MovieRole();
+		  n=this.movieRoleRepository.getById(movieCastDto.getMovieRoleID());
+		  MovieCastKey novi=new MovieCastKey();
+		  novi.setContentID(movieCastDto.getContentID());
+		  novi.setMoviePeopleID(movieCastDto.getMoviePeopleID());
+		  novi.setMovieRoleID(movieCastDto.getMovieRoleID());
+		  this.movieCastRepository.save(new MovieCast(novi,content,n,m));
+		return new MovieCast(novi,content,n,m);
+		
+		}
 }

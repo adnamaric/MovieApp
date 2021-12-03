@@ -51,4 +51,5 @@ public class MoviePeopleController {
 			public MoviePeopleRole addRole (@RequestBody MoviePeopleRoleDto moviePeopleRoleDto) throws NotFoundException {
 				return moviePeopleService.addRole(moviePeopleRoleDto);
 			}
+		
 }
