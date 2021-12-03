@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.course.movie.dto.MoviePeopleDto;
+import com.course.movie.dto.MoviePeopleRoleDto;
 import com.course.movie.model.MoviePeople;
+import com.course.movie.model.MoviePeopleRole;
 import com.course.movie.repository.MoviePeopleRepository;
 import com.course.movie.service.MoviePeopleService;
 
@@ -45,4 +47,8 @@ public class MoviePeopleController {
 		public void delete(@RequestParam int id) throws NotFoundException {
 			moviePeopleService.delete(id);
 		}
+		 @PostMapping("/addRole")
+			public MoviePeopleRole addRole (@RequestBody MoviePeopleRoleDto moviePeopleRoleDto) throws NotFoundException {
+				return moviePeopleService.addRole(moviePeopleRoleDto);
+			}
 }

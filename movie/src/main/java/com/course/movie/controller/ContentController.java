@@ -67,5 +67,6 @@ public class ContentController {
 		public Review addReview (@RequestBody ReviewDto reviewDto) throws NotFoundException {
 			return contentService.addReview(reviewDto);
 		}
+		
 
 }

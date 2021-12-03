@@ -170,16 +170,9 @@ public class ContentService {
 	  content=this.contentRepository.getById(reviewDto.getContentID());
 	  user=this.userRepository.getById(reviewDto.getUserID());
 	  ReviewKey noviKey=new ReviewKey();
-	  
 	  noviKey.setContentID(content.getContentID());
 	  noviKey.setUserID(user.getUserID());
-	 
 	  this.reviewRepository.save(new Review(noviKey,user,content,reviewDto.getRating(),reviewDto.getFavourite()));
-	  Review noviR=new Review();
-	  noviR.setRating(reviewDto.getRating());
-	  noviR.setFavourite(reviewDto.getFavourite());
-	  noviR.setContent(this.contentRepository.getById(reviewDto.getContentID()));
-	  noviR.setUser(this.userRepository.getById(reviewDto.getUserID()));
-	  return noviR;
+	  return new Review(noviKey,user,content,reviewDto.getRating(),reviewDto.getFavourite());
 	}
 }

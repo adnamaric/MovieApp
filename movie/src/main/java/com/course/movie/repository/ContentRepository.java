@@ -16,7 +16,7 @@ public interface ContentRepository extends JpaRepository<Content, Integer> {
 
 
 	List<Content> findAll();
-
+    Content getById(int id);
 	
 
 	
