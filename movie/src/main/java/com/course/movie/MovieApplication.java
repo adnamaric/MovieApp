@@ -156,16 +156,27 @@ public class MovieApplication {
 							 st.execute(" INSERT INTO Content_Comment VALUES (1,'Great movie',1,1)");
 							 st.execute(" INSERT INTO Content_Comment VALUES (2,'Awful movie',1,2)");
 				    		 System.out.println("Uspješno dodani podaci");}
-		// content_genre
-//						 rs=st.executeQuery("SELECT * FROM Content_Genre");
-//						 if(rs.next()==true)
-//						 {
-//				        	 System.out.println("U bazi već postoje podaci");
-//				         }
-//						 else { 
-//							 st.execute(" INSERT INTO Content_Genre VALUES (1,1)");
-//							 st.execute(" INSERT INTO Content_Genre VALUES(2,2)");
-//				    		 System.out.println("Uspješno dodani podaci");}
+		 //content_genre
+						 rs=st.executeQuery("SELECT * FROM Content_Genre");
+						 if(rs.next()==true)
+						 {
+				        	 System.out.println("U bazi već postoje podaci");
+				         }
+						 else { 
+							 st.execute(" INSERT INTO Content_Genre VALUES (1,1)");
+							 st.execute(" INSERT INTO Content_Genre VALUES(2,2)");
+				    		 System.out.println("Uspješno dodani podaci");}
+						 
+		//review 				 
+						 rs=st.executeQuery("SELECT * FROM Review");
+						 if(rs.next()==true)
+						 {
+				        	 System.out.println("U bazi već postoje podaci");
+				         }
+						 else { 
+							 st.execute(" INSERT INTO Review VALUES (1,1,'true',3.4)");
+						 }
+						
 			 con.close();
 		}
 			 catch (Throwable e) {

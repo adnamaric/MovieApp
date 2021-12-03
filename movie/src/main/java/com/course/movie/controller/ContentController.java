@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.course.movie.dto.ContentDto;
 import com.course.movie.dto.ContentGenreDto;
+import com.course.movie.dto.ReviewDto;
 import com.course.movie.model.Content;
 import com.course.movie.model.ContentGenre;
+import com.course.movie.model.Review;
 import com.course.movie.repository.ContentGenreRepository;
 import com.course.movie.repository.ContentRepository;
 import com.course.movie.service.ContentService;
@@ -60,6 +62,10 @@ public class ContentController {
 		@PostMapping("/addGenre")
 		public ContentGenre addGenre (@RequestBody ContentGenreDto contentGenreDto) throws NotFoundException {
 			return contentService.addGenre(contentGenreDto);
+		}
+		@PostMapping("/addReview")
+		public Review addReview (@RequestBody ReviewDto reviewDto) throws NotFoundException {
+			return contentService.addReview(reviewDto);
 		}
 
 }

@@ -68,6 +68,8 @@ public class Content {
     @OneToMany(mappedBy = "genre")
     List<ContentGenre> contentGenre;
 
+    @OneToMany(mappedBy = "user")
+    List<Review> review;
     
 /*	public Integer getContentID() {
 		return ContentID;

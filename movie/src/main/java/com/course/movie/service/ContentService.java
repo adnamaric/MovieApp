@@ -7,6 +7,7 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 import com.course.movie.dto.ContentDto;
 import com.course.movie.dto.ContentGenreDto;
+import com.course.movie.dto.ReviewDto;
 import com.course.movie.model.Content;
 import com.course.movie.model.ContentGenre;
 import com.course.movie.model.ContentGenreKey;
@@ -14,12 +15,17 @@ import com.course.movie.model.ContentType;
 import com.course.movie.model.Country;
 import com.course.movie.model.Genre;
 import com.course.movie.model.Language;
+import com.course.movie.model.Review;
+import com.course.movie.model.ReviewKey;
+import com.course.movie.model.User;
 import com.course.movie.repository.ContentGenreRepository;
 import com.course.movie.repository.ContentRepository;
 import com.course.movie.repository.ContentTypeRepository;
 import com.course.movie.repository.CountryRepository;
 import com.course.movie.repository.GenreRepository;
 import com.course.movie.repository.LanguageRepository;
+import com.course.movie.repository.ReviewRepository;
+import com.course.movie.repository.UserRepository;
 
 @Service
 public class ContentService {
@@ -36,7 +42,10 @@ public class ContentService {
 	ContentGenreRepository contentGenreRepository;
 	@Autowired
 	GenreRepository genreRepository;
-
+	@Autowired
+	ReviewRepository reviewRepository;
+	@Autowired
+	UserRepository userRepository;
 	
 	public Content save(ContentDto contentDto) {
 		return contentRepository.save(createContentFromDto(contentDto));
@@ -141,35 +150,36 @@ public class ContentService {
      	 novi.setGenre(genre);
      	 novi.setId(n);
      	 return novi;
-        // provjerit u  content genre role key da ne postoji ista kombinacija kljuceva
-//     	 List<ContentGenreKey> contentGenreKey =new ArrayList<ContentGenreKey>();
-//     	contentGenreKey=this.contentGenreKeyRepository.findAll();
-//     	Boolean postoji=false;
-//     	for(int i=0; i<list1.size();i++) {
-//     		ContentGenreKey pretrazi= contentGenreKey.get(i);
-//     		if(pretrazi.getContentID()==contentGenreDto.getContentID() && pretrazi.getGenreId()== contentGenreDto.getGenreID())
-//     			postoji=true;
-//     		
-//            }
-//     		if(!postoji) 
-//     		{
-//     			ContentGenreKey novakombinacija=new ContentGenreKey();
-//     			novakombinacija.setContentID(contentGenreDto.getContentID());
-//     			novakombinacija.setGenreId(contentGenreDto.getGenreID());
-//     			this.contentGenreKeyRepository.save(novakombinacija);
-//     			return novi;
-//     		}
-//     		else
-//     			return null;
-//     			
-     			
-     		
-     		
-     		
+       
     }
 //	
 	public ContentGenre addGenre(ContentGenreDto contentGenreDto) {
 	       
 		return contentGenreRepository.save(createContentGenreFromContent(contentGenreDto));
+	}
+	
+	public Review addReview(ReviewDto reviewDto) {
+	       
+		return reviewRepository.save(createReview(reviewDto));
+	}
+
+	private Review createReview(ReviewDto reviewDto) {
+	  
+	  User user=new User();
+	  Content content=new Content();
+	  content=this.contentRepository.getById(reviewDto.getContentID());
+	  user=this.userRepository.getById(reviewDto.getUserID());
+	  ReviewKey noviKey=new ReviewKey();
+	  
+	  noviKey.setContentID(content.getContentID());
+	  noviKey.setUserID(user.getUserID());
+	 
+	  this.reviewRepository.save(new Review(noviKey,user,content,reviewDto.getRating(),reviewDto.getFavourite()));
+	  Review noviR=new Review();
+	  noviR.setRating(reviewDto.getRating());
+	  noviR.setFavourite(reviewDto.getFavourite());
+	  noviR.setContent(this.contentRepository.getById(reviewDto.getContentID()));
+	  noviR.setUser(this.userRepository.getById(reviewDto.getUserID()));
+	  return noviR;
 	}
 }
