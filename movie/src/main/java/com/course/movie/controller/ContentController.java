@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.course.movie.dto.ContentDto;
+import com.course.movie.dto.ContentGenreDto;
 import com.course.movie.model.Content;
+import com.course.movie.model.ContentGenre;
+import com.course.movie.repository.ContentGenreRepository;
 import com.course.movie.repository.ContentRepository;
 import com.course.movie.service.ContentService;
 
@@ -29,6 +32,8 @@ public class ContentController {
 	ContentService contentService;
 	@Autowired
 	ContentRepository contentRepository;
+    @Autowired
+    ContentGenreRepository contentGenreRepository;
 	 @GetMapping("/test")
 	  public String sayHello(){
 	        return "It works";
@@ -51,6 +56,10 @@ public class ContentController {
 		@DeleteMapping("/delete")
 		public void delete(@RequestParam int id) throws NotFoundException {
 			contentService.delete(id);
+		}
+		@PostMapping("/addGenre")
+		public ContentGenre addGenre (@RequestBody ContentGenreDto contentGenreDto) throws NotFoundException {
+			return contentService.addGenre(contentGenreDto);
 		}
 
 }

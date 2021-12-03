@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.course.movie.dto.ContentCommentDto;
 import com.course.movie.model.Content;
@@ -15,7 +16,7 @@ import com.course.movie.repository.ContentCommentRepository;
 import com.course.movie.repository.ContentRepository;
 import com.course.movie.repository.UserRepository;
 
-
+@Service
 public class ContentCommentService {
 	@Autowired
 	ContentCommentRepository contentCommentRepository;

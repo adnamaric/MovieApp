@@ -6,13 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 import com.course.movie.dto.ContentDto;
+import com.course.movie.dto.ContentGenreDto;
 import com.course.movie.model.Content;
+import com.course.movie.model.ContentGenre;
+import com.course.movie.model.ContentGenreKey;
 import com.course.movie.model.ContentType;
 import com.course.movie.model.Country;
+import com.course.movie.model.Genre;
 import com.course.movie.model.Language;
+import com.course.movie.repository.ContentGenreRepository;
 import com.course.movie.repository.ContentRepository;
 import com.course.movie.repository.ContentTypeRepository;
 import com.course.movie.repository.CountryRepository;
+import com.course.movie.repository.GenreRepository;
 import com.course.movie.repository.LanguageRepository;
 
 @Service
@@ -26,6 +32,11 @@ public class ContentService {
 	LanguageRepository languageRepository;
 	@Autowired
 	ContentTypeRepository contentTypeRepository;
+	@Autowired
+	ContentGenreRepository contentGenreRepository;
+	@Autowired
+	GenreRepository genreRepository;
+
 	
 	public Content save(ContentDto contentDto) {
 		return contentRepository.save(createContentFromDto(contentDto));
@@ -93,5 +104,72 @@ public class ContentService {
 		 }
 	       }
 		return content;
+	}
+    private ContentGenre createContentGenreFromContent(ContentGenreDto contentGenreDto) {
+       ContentGenre novi= new ContentGenre();
+       Genre genre=new Genre();
+       Content cont=new Content();
+       List<Content> list= new ArrayList<Content>(); 
+    	list=this.contentRepository.findAll();
+    	 for(int i=0; i<list.size();i++) {
+    			Content trazeni = list.get(i);
+    		    if(trazeni.getContentID()==contentGenreDto.getContentID()) {
+    		    	cont.setContentID(trazeni.getContentID());
+    		    	cont.setContentType(trazeni.getContentType());
+    		    	cont.setContentGenre(trazeni.getContentGenre());
+    		    	cont.setCountry(trazeni.getCountry());
+    		    	cont.setDuration(trazeni.getDuration());
+    		    	cont.setTitle(trazeni.getTitle());
+    		    	cont.setYear(trazeni.getYear());
+    			 }
+    		       }
+    	 List<Genre> list1= new ArrayList<Genre>(); 
+     	list1=this.genreRepository.findAll();
+     	 for(int i=0; i<list1.size();i++) {
+     		 Genre trazeni = list1.get(i);
+     		    if(trazeni.getGenreId()==contentGenreDto.getGenreId()) {
+     		    	genre.setGenreId(trazeni.getGenreId());
+     		    	genre.setName(trazeni.getName());
+     			 }
+     		       }
+     	
+     	 
+     	 ContentGenreKey n=new ContentGenreKey(contentGenreDto.getContentID(),contentGenreDto.getGenreId());
+          
+     	 contentGenreRepository.save(new ContentGenre(n,cont,genre));
+     	 novi.setContent(cont);
+     	 novi.setGenre(genre);
+     	 novi.setId(n);
+     	 return novi;
+        // provjerit u  content genre role key da ne postoji ista kombinacija kljuceva
+//     	 List<ContentGenreKey> contentGenreKey =new ArrayList<ContentGenreKey>();
+//     	contentGenreKey=this.contentGenreKeyRepository.findAll();
+//     	Boolean postoji=false;
+//     	for(int i=0; i<list1.size();i++) {
+//     		ContentGenreKey pretrazi= contentGenreKey.get(i);
+//     		if(pretrazi.getContentID()==contentGenreDto.getContentID() && pretrazi.getGenreId()== contentGenreDto.getGenreID())
+//     			postoji=true;
+//     		
+//            }
+//     		if(!postoji) 
+//     		{
+//     			ContentGenreKey novakombinacija=new ContentGenreKey();
+//     			novakombinacija.setContentID(contentGenreDto.getContentID());
+//     			novakombinacija.setGenreId(contentGenreDto.getGenreID());
+//     			this.contentGenreKeyRepository.save(novakombinacija);
+//     			return novi;
+//     		}
+//     		else
+//     			return null;
+//     			
+     			
+     		
+     		
+     		
+    }
+//	
+	public ContentGenre addGenre(ContentGenreDto contentGenreDto) {
+	       
+		return contentGenreRepository.save(createContentGenreFromContent(contentGenreDto));
 	}
 }

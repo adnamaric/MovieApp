@@ -10,7 +10,9 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
@@ -21,48 +23,25 @@ import lombok.Setter;
 @Table(name = "ContentGenre")
 @Getter
 @Setter
-
- class ContentGenre {
+@AllArgsConstructor
+@NoArgsConstructor
+ public class ContentGenre {
 
     @EmbeddedId
     @Column(name = "content_genre_id", nullable = false)
-    @JsonIgnore
-    ContentGenreKey id;
+    private ContentGenreKey id;
 
     @ManyToOne
     @MapsId("ContentID")
     @JsonIgnore
     @JoinColumn(name = "ContentID")
-    Content content;
+    private Content content;
 
     @ManyToOne
     @MapsId("GenreId")
+    @JsonIgnore
     @JoinColumn(name = "GenreId")
-    Genre genre;
-
-	public ContentGenreKey getId() {
-		return id;
-	}
-
-	public void setId(ContentGenreKey id) {
-		this.id = id;
-	}
-
-	public Content getContent() {
-		return content;
-	}
-
-	public void setContent(Content content) {
-		this.content = content;
-	}
-
-	public Genre getGenre() {
-		return genre;
-	}
-
-	public void setGenre(Genre genre) {
-		this.genre = genre;
-	}
+    private Genre genre;
 
     
     

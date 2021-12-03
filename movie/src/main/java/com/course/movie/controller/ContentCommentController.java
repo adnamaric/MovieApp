@@ -19,7 +19,7 @@ import com.course.movie.repository.ContentCommentRepository;
 import com.course.movie.service.ContentCommentService;
 
 @RestController
-@RequestMapping("/contentcomment")
+@RequestMapping("/comment")
 public class ContentCommentController {
 	@Autowired
 	ContentCommentService commentService;

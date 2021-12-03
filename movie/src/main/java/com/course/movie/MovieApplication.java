@@ -134,6 +134,38 @@ public class MovieApplication {
 				        	 st.execute("INSERT INTO Episode VALUES(2,60,'Where it all starts',2,1)");
 				        	 st.execute("INSERT INTO Episode VALUES(3,60,'Drama never stops',3,1)");
 				    		 System.out.println("Uspješno dodani podaci");}
+		//user
+						 rs=st.executeQuery("SELECT * FROM Users");
+						 if(rs.next()==true)
+						 {
+				        	 System.out.println("U bazi već postoje podaci");
+				         }
+						 else { 
+							 st.execute(" INSERT INTO Users VALUES (1,True,'Unknown road','user1@gmail.com','User','1','user1')");
+							 st.execute(" INSERT INTO Users VALUES (2,True,'Unknown road','user2@gmail.com','Mobile','2','mobile')");
+				    		 System.out.println("Uspješno dodani podaci");}
+						 
+						 
+		//content_comment	
+						 rs=st.executeQuery("SELECT * FROM Content_Comment");
+						 if(rs.next()==true)
+						 {
+				        	 System.out.println("U bazi već postoje podaci");
+				         }
+						 else { 
+							 st.execute(" INSERT INTO Content_Comment VALUES (1,'Great movie',1,1)");
+							 st.execute(" INSERT INTO Content_Comment VALUES (2,'Awful movie',1,2)");
+				    		 System.out.println("Uspješno dodani podaci");}
+		// content_genre
+//						 rs=st.executeQuery("SELECT * FROM Content_Genre");
+//						 if(rs.next()==true)
+//						 {
+//				        	 System.out.println("U bazi već postoje podaci");
+//				         }
+//						 else { 
+//							 st.execute(" INSERT INTO Content_Genre VALUES (1,1)");
+//							 st.execute(" INSERT INTO Content_Genre VALUES(2,2)");
+//				    		 System.out.println("Uspješno dodani podaci");}
 			 con.close();
 		}
 			 catch (Throwable e) {

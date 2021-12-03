@@ -36,14 +36,14 @@ public class User {
     @Column(nullable = false)
     private String address;
 
-    @Column(nullable = false)
-    private String phoneNumber;
+//    @Column(nullable = false)
+//    private String phoneNumber;
 
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
-    private String password;
+//    @Column(nullable = false)
+//    private String password;
 
 
 }

@@ -16,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 
-class ContentGenreKey implements Serializable {
+public class ContentGenreKey implements Serializable {
 
 
 	/**
@@ -25,10 +25,10 @@ class ContentGenreKey implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "ContentID")
-    Long ContentID;
+  private int  ContentID;
 
     @Column(name = "GenreId")
-    Long GenreId;
+   private int GenreId;
     
    
     // standard constructors, getters, and setters
