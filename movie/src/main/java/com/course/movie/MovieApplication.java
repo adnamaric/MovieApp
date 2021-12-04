@@ -176,7 +176,17 @@ public class MovieApplication {
 						 else { 
 							 st.execute(" INSERT INTO Review VALUES (1,1,'true',3.4)");
 						 }
-						
+		//role
+						 rs=st.executeQuery("SELECT * FROM Role");
+						 if(rs.next()==true)
+						 {
+				        	 System.out.println("U bazi već postoje podaci");
+				         }
+						 else { 
+							 st.execute(" INSERT INTO Role VALUES (1,'Admin')");
+							 st.execute(" INSERT INTO Role VALUES (2,'User')");
+						 }
+						 
 			 con.close();
 		}
 			 catch (Throwable e) {
