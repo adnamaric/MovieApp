@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.course.movie.dto.SeasonDto;
+import com.course.movie.dto.SerieCastDto;
 import com.course.movie.model.Season;
+import com.course.movie.model.SerieCast;
 import com.course.movie.repository.SeasonRepository;
 import com.course.movie.service.SeasonService;
 
@@ -52,4 +54,8 @@ public class SeasonController {
 		public void delete(@RequestParam int id) throws NotFoundException {
 			seasonService.delete(id);
 		}
+		 @PostMapping("/addSerieCast")
+			public SerieCast addSerieCast(@RequestBody SerieCastDto serieCastDto) throws NotFoundException {
+				return seasonService.addSerieCast(serieCastDto);
+			}
 }

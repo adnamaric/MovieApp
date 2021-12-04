@@ -9,10 +9,18 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.course.movie.dto.SeasonDto;
+import com.course.movie.dto.SerieCastDto;
 import com.course.movie.model.Content;
+import com.course.movie.model.MoviePeople;
+import com.course.movie.model.MovieRole;
 import com.course.movie.model.Season;
+import com.course.movie.model.SerieCast;
+import com.course.movie.model.SerieCastKey;
 import com.course.movie.repository.ContentRepository;
+import com.course.movie.repository.MoviePeopleRepository;
+import com.course.movie.repository.MovieRoleRepository;
 import com.course.movie.repository.SeasonRepository;
+import com.course.movie.repository.SerieCastRepository;
 
 @Service
 public class SeasonService {
@@ -20,6 +28,13 @@ public class SeasonService {
 	SeasonRepository seasonRepository;
 	@Autowired
 	ContentRepository contentRepository;
+	@Autowired
+	SerieCastRepository serieCastRepository;
+	@Autowired
+	MovieRoleRepository movieRoleRepository;
+	@Autowired
+	MoviePeopleRepository moviePeopleRepository;
+	
 	public Season save(SeasonDto seasonDto) {
 		return seasonRepository.save(createSeasonFromDto(seasonDto));
 	}
@@ -54,10 +69,8 @@ public class SeasonService {
 		Season season = new Season();
 		season.setSeasonName(seasonDto.getSeasonName());
 		season.setSeasonNumber(seasonDto.getSeasonNumber());
-		//season.setContentID(seasonDto.getContentID());
 		List<Content> list= new ArrayList<Content>(); 
 		list=this.contentRepository.findAll();
-		//Boolean jePronadjen=false;
 	    for(int i=0; i<list.size();i++) {
 		Content trazeni = list.get(i);
 	    if(trazeni.getContentID()==seasonDto.getContentID()) {
@@ -68,5 +81,22 @@ public class SeasonService {
 	   
 			
 		return season;
+	}
+	public SerieCast addSerieCast (SerieCastDto serieCastDto) {
+		return serieCastRepository.save(addCast(serieCastDto));
+	}
+	private SerieCast addCast(SerieCastDto serieCastDto) {
+ 		Season season = new Season();
+ 		season=this.seasonRepository.getById(serieCastDto.getSeasonId());
+ 		MovieRole movieRole=new MovieRole();
+ 		movieRole=this.movieRoleRepository.getById(serieCastDto.getMovieRoleID());
+ 		MoviePeople moviePeople=new MoviePeople();
+ 		moviePeople=this.moviePeopleRepository.getById(serieCastDto.getMoviePeopleID());
+ 		SerieCastKey n=new SerieCastKey();
+ 		n.setMoviePeopleID(serieCastDto.getMoviePeopleID());
+ 		n.setMovieRoleID(serieCastDto.getMovieRoleID());
+ 		n.setSeasonId(serieCastDto.getSeasonId());
+ 		this.serieCastRepository.save(new SerieCast(n,season,movieRole,moviePeople));
+		return new SerieCast(n,season,movieRole,moviePeople);
 	}
 }

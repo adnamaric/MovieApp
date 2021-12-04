@@ -10,6 +10,9 @@ import javax.persistence.MapsId;
 
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 //import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -22,27 +25,32 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+
 @Entity
 @Table(name = "SerieCast")
- class SerieCast {
+ public class SerieCast {
 
 	   @EmbeddedId
-	   SerieCastKey id;
+	 private SerieCastKey id;
 
 	    @ManyToOne
 	    @MapsId("SeasonId")
+	    @JsonIgnore
 	    @JoinColumn(name = "SeasonId")
-	    Season season;
+	    private  Season season;
 	    
 	    @ManyToOne
 	    @MapsId("MovieRoleID")
+	    @JsonIgnore
 	    @JoinColumn(name = "MovieRoleID")
-	    MovieRole movieRole;
+	    private MovieRole movieRole;
 
 	    @ManyToOne
 	    @MapsId("MoviePeopleID")
+	    @JsonIgnore
 	    @JoinColumn(name = "MoviePeopleID")
-	    MoviePeople moviePeople;
+	    private MoviePeople moviePeople;
 
    
 }
