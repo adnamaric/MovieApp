@@ -1,11 +1,13 @@
 package com.course.movie.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -46,6 +48,8 @@ public class User {
     @Column(nullable = false)
     private String email;
 
+    @OneToMany(mappedBy = "user")
+    List<UserRole> userRole;
 //    @Column(nullable = false)
 //    private String password;
 

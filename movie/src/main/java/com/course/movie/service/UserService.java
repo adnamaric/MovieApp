@@ -11,7 +11,11 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.course.movie.dto.UserDto;
+import com.course.movie.dto.UserRoleDto;
+import com.course.movie.model.Role;
 import com.course.movie.model.User;
+import com.course.movie.model.UserRole;
+import com.course.movie.model.UserRoleKey;
 import com.course.movie.repository.RoleRepository;
 import com.course.movie.repository.UserRepository;
 import com.course.movie.repository.UserRoleRepository;
@@ -90,6 +94,19 @@ public class UserService {
 		else	
 			throw new NullPointerException("Username or email are used!");
 		
+	}
+
+	public UserRole addRole(UserRoleDto userRoleDto) {
+		// TODO Auto-generated method stub
+		User user = new User();
+		user=this.userRepository.getById(userRoleDto.getUserID());
+		Role role= new Role();
+		role=this.roleRepository.getById(userRoleDto.getRoleID());
+		UserRoleKey novi=new UserRoleKey();
+		novi.setRoleID(userRoleDto.getRoleID());
+		novi.setUserID(userRoleDto.getUserID());
+		this.userRoleRepository.save(new UserRole(novi,role,user));
+		return new UserRole(novi,role,user);
 	}
 	
 	

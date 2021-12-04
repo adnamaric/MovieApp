@@ -6,22 +6,35 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 @Entity
 @Table
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserRole {
 
 	  @EmbeddedId
-	   UserRoleKey id;
+	  private  UserRoleKey id;
 
 	    @ManyToOne
 	    @MapsId("RoleID")
+	    @JsonIgnore
 	    @JoinColumn(name = "RoleID")
-	    Role role;
+	    private  Role role;
 
 	    @ManyToOne
 	    @MapsId("UserID")
+	    @JsonIgnore
 	    @JoinColumn(name = "UserID")
-        User user;
+	    private  User user;
    
     
    

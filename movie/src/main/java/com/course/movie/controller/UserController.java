@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.course.movie.dto.UserDto;
+import com.course.movie.dto.UserRoleDto;
 import com.course.movie.model.User;
+import com.course.movie.model.UserRole;
 import com.course.movie.repository.UserRepository;
 import com.course.movie.service.UserService;
 
@@ -55,4 +57,8 @@ public class UserController {
 			
 			return userService.getByEmail(email);
 		}
+		 @PostMapping("/addRole")
+			public UserRole addRole(@RequestBody UserRoleDto userRoleDto) throws NotFoundException {
+				return userService.addRole(userRoleDto);
+			}
 }
